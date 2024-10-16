@@ -94,33 +94,43 @@
               "
             ></app-custom-select>
 
-            <input
-              type="text"
-              class="form-control"
-              [placeholder]="
-                valuePlaceholders[
-                  form.get(['rules', ruleIndex, 'operator']).value
-                ] || ''
-              "
-              formControlName="value"
-              [attr.disabled]="
-                form.get(['rules', ruleIndex, 'operator']).value === 'null' ||
-                form.get(['rules', ruleIndex, 'operator']).value ===
-                  'empty_array'
-                  ? true
-                  : null
-              "
-            />
-
-            <button
-              type="button"
-              ngbTooltip="toggle enable"
-              class="btn btn-link btn-icon"
-            >
-              <app-svg
-                icon="check"
+            <div class="me-2">
+              <input
+                type="text"
+                class="form-control"
+                [placeholder]="
+                  valuePlaceholders[
+                    form.get(['rules', ruleIndex, 'operator']).value
+                  ] || ''
+                "
+                formControlName="value"
+                [attr.disabled]="
+                  form.get(['rules', ruleIndex, 'operator']).value === 'null' ||
+                  form.get(['rules', ruleIndex, 'operator']).value ===
+                    'empty_array'
+                    ? true
+                    : null
+                "
               />
-            </button>
+            </div>
+
+            <app-toggle
+              class="me-2"
+              [uncheckable]="true"
+              formControlName="invert"
+              prefix="rule"
+              [items]="rulesInvert"
+            ></app-toggle>
+
+            <!--<div class="form-check d-flex justify-content-between mt-2 px-2">-->
+            <!--  <input-->
+            <!--    type="checkbox"-->
+            <!--    class="form-check-input"-->
+            <!--    id="toggle-rule"-->
+            <!--    formControlName="toggle-rule"-->
+            <!--  />-->
+            <!--  <label class="form-check-label" for="toggle-rule">Enable</label>-->
+            <!--</div>-->
 
             <button
               *ngIf="deleteRuleRequested$ | async as deleteRuleRequested"
